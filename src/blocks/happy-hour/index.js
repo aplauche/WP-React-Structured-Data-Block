@@ -108,10 +108,7 @@ registerBlockType('fsdhh/happy-hour', {
             ))}
 
           </div>
-          <hr />
-          <button onClick={handleClear}>Clear All</button>  
           </>
-
         ): (
           <button onClick={handleClear}>Add Timeslots</button>
         )}

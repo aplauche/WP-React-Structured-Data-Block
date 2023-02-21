@@ -55,9 +55,9 @@ function fsdhh_happy_hour_post_type(){
 
 	register_post_type( 'happyhour', $args );
 
-  register_taxonomy( 'specials', 'happyhour', [
-    'label' => __('Specials', 'fsd-hh'),
-    'rewrite' => ['slug' => 'specials'],
+  register_taxonomy( 'special', 'happyhour', [
+    'label' => __('Special', 'fsd-hh'),
+    'rewrite' => ['slug' => 'special'],
     'show_in_rest' => true
   ] );
 
