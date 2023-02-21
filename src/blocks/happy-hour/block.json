@@ -11,6 +11,9 @@
       "type": "string"
     }
   },
+  "supports": {
+    "lock": false
+  },
   "editorScript": "file:./index.js",
   "script": "file:./frontend.js",
   "style": "file:./index.css",

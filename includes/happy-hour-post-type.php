@@ -43,6 +43,14 @@ function fsdhh_happy_hour_post_type(){
 		'menu_position'      => 20,
 		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields'),
     'description'        => __('A custom happy hour post type', 'fsd-hh'),
+    'template' => array(
+      array('fsdhh/happy-hour', array(
+        'lock' => array(
+          'move'   => true,
+          'remove' => true,
+        ),
+      ))
+    )
 	);
 
 	register_post_type( 'happyhour', $args );
