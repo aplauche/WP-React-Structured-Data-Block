@@ -3,10 +3,12 @@ import { registerBlockType } from '@wordpress/blocks'
 import {useBlockProps} from '@wordpress/block-editor'
 import {useSelect, useDispatch} from '@wordpress/data'
 
+import './index.scss'
+
 registerBlockType('fsdhh/happy-hour', {
   edit({attributes, setAttributes, context}){
 
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({className: "fsdhh-happy-hour-admin"});
 
     const  {happy_hour_times} = useSelect(select => {
 
@@ -67,17 +69,21 @@ registerBlockType('fsdhh/happy-hour', {
 
     return (
       <div {...blockProps}>
-        <h3>Happy Hour Schedule</h3>
+        <strong>Happy Hour Schedule</strong>
         <hr />
         {happy_hour_times.hasOwnProperty('sunday') ? (
           <>
             <div style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr"}}>
-            <div>Day</div>
-            <div>Start</div>
-            <div>End</div>
+              <div>Day</div>
+              <div>Start</div>
+              <div>End</div>
+            </div>
+            <hr />
+            <div style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "4px"}}> 
             {Object.entries(happy_hour_times)?.map(([day, times]) => (
               <>
-              <div>{day}</div>
+              {/* Capitalize first letter */}
+              <div>{day.charAt(0).toUpperCase() + day.slice(1)}</div>
               <div>
                 <input 
                   name="start"
@@ -102,6 +108,7 @@ registerBlockType('fsdhh/happy-hour', {
             ))}
 
           </div>
+          <hr />
           <button onClick={handleClear}>Clear All</button>  
           </>
 

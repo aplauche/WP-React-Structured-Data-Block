@@ -38,7 +38,7 @@ add_action('init', 'fsdhh_happy_hour_post_type');
 // Register Blocks
 function fsdhh_register_blocks(){
   register_block_type( FSDHH_DIR . '/build/blocks/happy-hour', array(
-    'render_callback' => 'fsd_happy_hour_render'
+    'render_callback' => 'fsdhh_happy_hour_render'
   ) );
 }
 
