@@ -22,7 +22,21 @@ function fsdhh_happy_hour_render($atts, $content, $block){
     <?php foreach($happy_hour_times as $day => $times): ?>
       <div>
         <p><strong><?php echo $day ?></strong></p>
-        <p><span><?php echo $times["start"] ?></span> - <span><?php echo $times["end"] ?></span></p>
+        <?php if(
+          array_key_exists('start', $times) &&
+          array_key_exists('end', $times) &&
+          $times["start"] !== "" &&
+          $times["end"] !== ""
+          ) :
+        ?>
+          <div>
+            <div><?php echo date('g:i a', strtotime($times["start"]))  ?></div> 
+            <div>-</div> 
+            <div><?php echo date('g:i a', strtotime($times["end"])) ?></div>
+          </div>
+        <?php else : ?>
+          <p> - - </p>
+        <?php endif; ?> 
       </div>
     <?php endforeach; ?>
   </div>
