@@ -12,7 +12,8 @@
     }
   },
   "supports": {
-    "lock": false
+    "lock": false,
+    "align": ["wide"]
   },
   "editorScript": "file:./index.js",
   "script": "file:./frontend.js",

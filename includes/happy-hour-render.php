@@ -11,7 +11,7 @@ function fsdhh_happy_hour_render($atts, $content, $block){
   $postNeighborhoods = is_array($postNeighborhoods) ? $postNeighborhoods : [];
   
   // Get taxonomy terms
-  $postSpecials = get_the_terms( $postID, 'special' );
+  $postSpecials = get_the_terms( $postID, 'specials' );
   // Force into an array
   $postSpecials = is_array($postSpecials) ? $postSpecials : [];
 
@@ -24,7 +24,7 @@ function fsdhh_happy_hour_render($atts, $content, $block){
   ob_start();?>
 
   <div class="happy-hour">
-    
+
     <div class="happy-hour-times">
       <?php foreach($happy_hour_times as $day => $times): ?>
         <div>

@@ -55,15 +55,17 @@ function fsdhh_happy_hour_post_type(){
 
 	register_post_type( 'happyhour', $args );
 
-  register_taxonomy( 'special', 'happyhour', [
-    'label' => __('Special', 'fsd-hh'),
-    'rewrite' => ['slug' => 'special'],
+  register_taxonomy( 'specials', 'happyhour', [
+    'label' => __('Specials', 'fsd-hh'),
+    'rewrite' => ['slug' => 'specials'],
+    'hierarchical' => true,
     'show_in_rest' => true
   ] );
 
   register_taxonomy( 'neighborhood', 'happyhour', [
     'label' => __('Neighborhood', 'fsd-hh'),
     'rewrite' => ['slug' => 'neighborhood'],
+    'hierarchical' => true,
     'show_in_rest' => true
   ] );
 
