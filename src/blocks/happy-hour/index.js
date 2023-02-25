@@ -10,6 +10,8 @@ registerBlockType('fsdhh/happy-hour', {
 
     const blockProps = useBlockProps({className: "fsdhh-happy-hour-admin"});
 
+    const [googleMapsUrl, setGoogleMapsUrl] = useState('');
+
     const  {happy_hour_times} = useSelect(select => {
 
       return select('core/editor').getEditedPostAttribute('meta')
@@ -67,6 +69,19 @@ registerBlockType('fsdhh/happy-hour', {
       })
     }
 
+    const handleGoogleUrlSubmit = () => {
+      // Hit custom REST endpoint to handle google API request
+      // Expected return of object:
+
+      // setAttributes({lat: x, long: x, rating: x})
+
+      // image also returned, but not immediatly stored
+
+      // setState(...image...)
+
+      // seperate handler will allow manual saving of image if desired
+    }
+
     return (
       <div {...blockProps}>
         <strong>Happy Hour Schedule</strong>
@@ -112,6 +127,18 @@ registerBlockType('fsdhh/happy-hour', {
         ): (
           <button onClick={handleClear}>Add Timeslots</button>
         )}
+
+        <div className='mt-5'>
+          <form onSubmit={handleGoogleUrlSubmit}>
+            <label htmlFor="googleLink">Link to location on Google maps:</label>
+            <input 
+              id="googleLink"
+              type="text" 
+              value={googleMapsUrl}
+              onChange={(e) => setGoogleMapsUrl(e.target.value) }
+            />
+          </form>
+        </div>
         
       </div>
     )
