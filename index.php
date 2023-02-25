@@ -33,6 +33,7 @@ foreach($allFiles as $filename) {
 add_action('init', 'fsdhh_register_assets');
 add_action('init', 'fsdhh_register_blocks');
 add_action('init', 'fsdhh_happy_hour_post_type');
+add_action('admin_menu', 'fsdhh_register_my_api_keys_page');
 
 
 // Register Blocks
