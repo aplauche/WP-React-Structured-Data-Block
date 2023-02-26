@@ -43,3 +43,13 @@ function fsdhh_register_blocks(){
   ) );
 }
 
+// API Endpoint
+
+add_action('rest_api_init', function () {
+  register_rest_route( 'fsdhh/v1', '/fetch-google-data', array(
+      'methods' => 'POST',
+      'callback' => 'fetch_google_place_data',
+      'permission_callback' => '__return_true'
+  ));
+});
+
