@@ -7,7 +7,8 @@ function fetch_google_place_data($req) {
   $lng = $req["lng"];
   $placeString = $req["placeString"];
 
-  $googleKey = get_option( 'google_api_key' );
+  $data_encryption = new FSDHH\Data_Encryption();
+  $googleKey = $data_encryption->decrypt(get_option( 'google_api_key' ));
 
   if(!empty($googleKey)){
 
@@ -42,7 +43,7 @@ function fetch_google_place_data($req) {
   }
 
 
-  return new WP_Error( 'error', 'You need a google key to use this', array( 'status' => 403 ) );
+  return new WP_Error( 'error', 'Please enter a google API key in settings to use this feature', array( 'status' => 403 ) );
 
 
 }

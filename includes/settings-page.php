@@ -12,6 +12,20 @@ function fsdhh_register_my_api_keys_page() {
  
 // The admin page containing the form
 function fsdhh_add_api_keys_callback() { ?>
+
+    <?php
+
+      $data_encryption = new FSDHH\Data_Encryption();
+      $api_key = get_option('google_api_key');
+
+      if($api_key){
+        $api_key = $data_encryption->decrypt( get_option('google_api_key'));
+      }
+
+
+    ?>
+
+
     <div class="wrap"><div id="icon-tools" class="icon32"></div>
         <h2>Happy Hour Settings</h2>
         <?php
@@ -33,7 +47,7 @@ function fsdhh_add_api_keys_callback() { ?>
             <!-- The nonce field is a security feature to avoid submissions from outside WP admin -->
             <?php wp_nonce_field( 'fsdhh_options_verify'); ?>
 
-            <input type="text" name="google_api_key" placeholder="Enter API Key" value="<?php echo get_option('google_api_key') ? esc_attr( get_option('google_api_key') ) : '' ; ?>">
+            <input type="password" name="google_api_key" placeholder="Enter API Key" value="<?php echo $api_key ? esc_attr( $api_key ) : '' ; ?>">
             <input type="hidden" name="action" value="process_form">			 
             <input type="submit" name="submit" id="submit" class="update-button button button-primary" value="Update API Key"  />
         </form> 
@@ -52,13 +66,19 @@ function fsdhh_submit_api_key() {
     // pass in the nonce ID from our form's nonce field - if the nonce fails this will kill script
     check_admin_referer( 'fsdhh_options_verify');
 
+
     if (isset($_POST['google_api_key'])) {
+
+        $data_encryption = new FSDHH\Data_Encryption();
         $api_key = sanitize_text_field( $_POST['google_api_key'] );
+        $encrypted_api_key = $data_encryption->encrypt($api_key);
+
         $api_exists = get_option('google_api_key');
+
         if (!empty($api_key) && !empty($api_exists)) {
-            update_option('google_api_key', $api_key);
+            update_option('google_api_key', $encrypted_api_key);
         } else {
-            add_option('google_api_key', $api_key);
+            add_option('google_api_key', $encrypted_api_key);
         }
     }
     wp_redirect($_SERVER['HTTP_REFERER'] . '&status=1');
